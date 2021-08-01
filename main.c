@@ -1,4 +1,6 @@
-#include "./inc/ur.h"
+#include "./inc/main.h"
+extern uint16_t bufStr[100];
+extern uint16_t lenBuf;
 
 void USART3_IRQHandler(void);
 
@@ -26,26 +28,9 @@ int main(void){
 
   SystemInit();// 72MHz
 
+  //USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
+
   while (1){
-  	USART_ITConfig(USART3, USART_IT_TXE, ENABLE);
-  	while(TxCounter1 < TxHelSize);
-  	TxCounter1 = 0x00;
-  	endStop();
-  	delay(1000);
+    ;
   }
-}
-
-
-void USART3_IRQHandler(void){
-  if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET){
-    /* Write one byte to the transmit data register */
-    USART_SendData(USART3, hel[TxCounter1++]);
-
-    if(TxCounter1 == TxHelSize)
-    {
-      /* Disable the USARTy Transmit interrupt */
-      USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
-    } 
-                // func(); - функция обработчик*/
-    }
 }

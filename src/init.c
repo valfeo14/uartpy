@@ -1,4 +1,4 @@
-#include "../inc/ur.h"
+#include "../inc/init.h"
 
 
 void RCC_Configuration(void){
@@ -9,6 +9,10 @@ void RCC_Configuration(void){
 }
 
 void GPIO_Configuration(void) {
+
+  //USART3 :
+  //pb10 TxD
+  //pb11 RxD
 
   GPIO_InitTypeDef GPIO_InitStructure;
   
@@ -28,7 +32,7 @@ void UART_Configuratuin(void) {
 
   USART_InitTypeDef USART_InitStructure;
   
-  USART_InitStructure.USART_BaudRate = 9600;
+  USART_InitStructure.USART_BaudRate = 115200;
   USART_InitStructure.USART_WordLength = USART_WordLength_8b;
   USART_InitStructure.USART_StopBits = USART_StopBits_1;
   USART_InitStructure.USART_Parity = USART_Parity_No;
@@ -36,8 +40,8 @@ void UART_Configuratuin(void) {
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
   USART_Init(USART3, &USART_InitStructure);
-  USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
-  USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
+  USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);// ENABLE ?
+  //USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
   USART_Cmd(USART3, ENABLE);
 }
 

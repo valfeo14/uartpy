@@ -2,10 +2,10 @@
 
 
 OBJECTS1 = startup_stm32f10x_md.o stm32f10x_rcc.o stm32f10x_gpio.o stm32f10x_usart.o system_stm32f10x.o misc.o
-OBJECTS2 = main.o ur.o
+OBJECTS2 = main.o init.o uart_tool.o
 SOUR = main.c ur.c stm32f10x_rcc.c stm32f10x_gpio.c stm32f10x_usart.c startup_stm32f10x_md.s misc.c
 COMPILE = arm-none-eabi-gcc
-FLAGS = -nostartfiles -ffreestanding -Wall -mthumb -mcpu=cortex-m3 -I/myc/stm/need/inc/
+FLAGS = -nostartfiles -ffreestanding -Wall -mthumb -mcpu=cortex-m3 -I../need/inc/
 LINK = arm-none-eabi-ld
 LINKFLAGS = -T
 
@@ -22,8 +22,11 @@ all: flash
 ./obj/main.o: main.c
 	$(COMPILE) $(FLAGS) -c main.c -o $(OBJDIR)/main.o
 
-./obj/ur.o: ./src/ur.c
-	$(COMPILE) $(FLAGS) -c $(SRCDIR)/ur.c -o $(OBJDIR)/ur.o
+./obj/init.o: ./src/init.c
+	$(COMPILE) $(FLAGS) -c $(SRCDIR)/init.c -o $(OBJDIR)/init.o
+
+./obj/uart_tool.o: ./src/uart_tool.c
+	$(COMPILE) $(FLAGS) -c $(SRCDIR)/uart_tool.c -o $(OBJDIR)/uart_tool.o
 
 usp.elf: $(OBJPROG2) $(OBJPROG1)
 	$(COMPILE) -T$(LD) $(OBJPROG2) $(OBJPROG1) $(FLAGS) -L/usr/arm-none-eabi/lib -lc -lg -lm -o usp.elf
