@@ -2,17 +2,18 @@
 extern uint16_t bufStr[100];
 extern uint16_t lenBuf;
 
-void USART3_IRQHandler(void);
+//void USART3_IRQHandler(void);
 
-#define TxHelSize   (sizeof(hel) - 1)
+//#define TxHelSize   (sizeof(hel) - 1)
 
 char hel[] = "Hello Valera Diken hello!\r\n";
+char * p1;
+char * p2;
 
-__IO uint8_t TxCounter1 = 0x00;
-const char newline[] = "\r\n";
+//__IO uint8_t TxCounter1 = 0x00;
+//const char newline[] = "\r\n";
 
 int main(void){
-  USART_InitTypeDef USART_InitStructure;
 
   /* System Clocks Configuration */
   RCC_Configuration();
@@ -29,6 +30,13 @@ int main(void){
   SystemInit();// 72MHz
 
   //USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
+  lenBuf = sizeof(hel)-1;
+  p1 = &hel[0];
+  p2 = &bufStr[0];
+  for (i=0; i<lenBuf; i++){
+   *p2++ = *p1++;
+  }
+  
 
   while (1){
     ;
