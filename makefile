@@ -1,7 +1,7 @@
 
 
 
-OBJECTS1 = startup_stm32f10x_md.o stm32f10x_rcc.o stm32f10x_gpio.o stm32f10x_usart.o system_stm32f10x.o misc.o
+OBJECTS1 = stm32f10x_rcc.o startup_stm32f10x_md.o stm32f10x_gpio.o stm32f10x_usart.o system_stm32f10x.o misc.o
 OBJECTS2 = main.o init.o uart_tool.o
 SOUR = main.c ur.c stm32f10x_rcc.c stm32f10x_gpio.c stm32f10x_usart.c startup_stm32f10x_md.s misc.c
 COMPILE = arm-none-eabi-gcc
@@ -11,12 +11,12 @@ LINKFLAGS = -T
 
 SRCDIR = ./src
 OBJDIR = ./obj
-OBJDIRNEED = /myc/stm/need/obj
+OBJDIRNEED = ../need/obj
 INCDIR = ./inc
 VPATH = $(INCDIR)
 OBJPROG1 = $(addprefix $(OBJDIRNEED)/, $(OBJECTS1))
 OBJPROG2 = $(addprefix $(OBJDIR)/, $(OBJECTS2))
-LD = /myc/stm/need/mem1.ld
+LD = ../need/mem1.ld
 
 all: flash
 ./obj/main.o: main.c

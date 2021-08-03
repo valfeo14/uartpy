@@ -1,10 +1,10 @@
 #include "../inc/uart_tool.h"
 
-static uint16_t bufStr[100];
+static char bufStr[100];
 static uint16_t lenBuf;
 
-uint16_t * get_bufStr(void){
-	return (uint16_t *) bufStr;
+char * get_bufStr(void){
+	return (char *) bufStr;
 }
 
 uint16_t get_lenBuf(void){
